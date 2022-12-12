@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import ProductItem from './ProductItem.js';
 import styled from 'styled-components';
 
-const Products = ({ setItems, items }) => {
+const Products = ({ setItems, items, addItem }) => {
 
     const NUMBER_OF_ITEMS = 10;
 
@@ -38,9 +38,11 @@ const Products = ({ setItems, items }) => {
             display.push (
                 <ProductItem 
                 key={id} 
+                id={id}
                 title={items[id]['title']} 
                 price={items[id]['price']} 
                 image={items[id]['image']}
+                addItem={addItem}
                 />
             )
         }
@@ -51,13 +53,23 @@ const Products = ({ setItems, items }) => {
     const itemsOnDisplay = displayItems();
 
     return (
-        <DisplayItems>
-            {itemsOnDisplay}
-        </DisplayItems>
+        <Container>
+             <DisplayItems>
+                {itemsOnDisplay}
+            </DisplayItems>
+        </Container>
+       
     )
 }
 
 export default Products;
+
+const Container = styled.div`
+    display: flex;
+    justify-content: center;
+    background-color: ${({ theme }) => theme.colors.backgroundgrey };
+    padding: 30px 0px;
+`
 
 const DisplayItems = styled.div`
     display: grid;

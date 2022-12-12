@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const ProductItem = ({title, price, image}) => {
+const ProductItem = ({id, title, price, image, addItem}) => {
     return (
         <ItemWrapper>
             <ImageSection>
@@ -12,7 +12,7 @@ const ProductItem = ({title, price, image}) => {
                     <Title>{title}</Title>
                     <Price>{price} $</Price>
                 </ProductInfo>
-                <Button>Add to cart</Button>
+                <Button id={id} onClick={addItem}>Add to cart</Button>
             </ContentSection>
         </ItemWrapper>
     )
@@ -22,7 +22,8 @@ const ItemWrapper = styled.div`
     display: flex;
     flex-direction: column;
     border-radius: 8px;
-    border: 1px solid rgb(229, 229, 229);
+    border: 1px solid ${ ({ theme }) => theme.colors.bordergrey };
+    background-color: ${ ({ theme }) => theme.colors.white };
 `;
 
 const ImageSection = styled.div`
@@ -32,7 +33,7 @@ const ImageSection = styled.div`
     align-items: center;
     width: 100%;
     height: 200px;
-    border-bottom: 1px solid rgb(229, 229, 229);
+    border-bottom: 1px solid ${ ({ theme }) => theme.colors.bordergrey };
 `;
 
 const Image = styled.img`
