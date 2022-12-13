@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
  
 const TotalItems = ( { totalQuantity }) => { 
-        console.log(totalQuantity);
         if (totalQuantity >= 1) {
             return (
                 <Items>

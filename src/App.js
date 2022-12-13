@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import Products from './Components/ProductPage/Products.js';
 import Header from './Components/Header/header.js';
+import Checkout from './Components/Checkout/checkout.js';
 
 const App = () => {
   const [items, setItems] = useState({});
@@ -60,53 +61,63 @@ const App = () => {
       totalPriceTemp = totalPriceTemp - parseFloat(items[id]['price'])
     }
 
-    setTotalPrice(totalPriceTemp);
+    setTotalPrice((Math.round(totalPriceTemp*100)/100));
   }
 
   const _updateTotalSpendPerItem = (id, add=true) => {
     let totalSpendPerItemTemp = totalSpendPerItem;
 
-    if (totalSpendPerItem[id] === undefined) {
-      totalSpendPerItem[id] = 0;
+    if (totalSpendPerItemTemp[id] === undefined) {
+      totalSpendPerItemTemp[id] = 0;
     }
 
+    totalSpendPerItemTemp[id] = parseFloat(totalSpendPerItemTemp[id]);
+
     if (add === true) {
-      totalSpendPerItemTemp[id] = totalSpendPerItem[id] + parseFloat(items[id]['price']);
+      totalSpendPerItemTemp[id] = totalSpendPerItemTemp[id] + parseFloat(items[id]['price']);
     } else {
-      totalSpendPerItemTemp[id] = totalSpendPerItem[id] - parseFloat(items[id]['price']);
+      totalSpendPerItemTemp[id] = totalSpendPerItemTemp[id] - parseFloat(items[id]['price']);
     }
+
+    totalSpendPerItemTemp[id] = (Math.round(totalSpendPerItemTemp[id]*100)/100).toFixed(2);
 
     setSpendPerItem(totalSpendPerItemTemp);
   }
 
+  const togglePopup = () => {
+    if(popupActive === true) {
+      setPopupActive(false);
+    } else {
+      setPopupActive(true);
+    }
+  }
 
   return (
     <div> 
-      <Header totalQuantity={totalQuantity}/>
-      <Products setItems={setItems} items={items} addItem={addItem}/>
+      <Header
+        totalQuantity={totalQuantity}
+        togglePopup={togglePopup}
+      />
+      <Products 
+        setItems={setItems}
+        items={items}
+        addItem={addItem}
+      />
+      <Checkout 
+        popupActive={popupActive}
+        togglePopup = {togglePopup}
+        totalPrice={totalPrice}
+        items={items}
+        orderData={orderData}
+        totalSpendPerItem={totalSpendPerItem}
+        addItem={addItem}
+        removeItem={removeItem}
+        />
     </div>
   );
 }
 
 export default App;
-
-// HEADER 
-
-// Display shopping items 
-  // If state.items.total === 0 return {}
-  // else return <circle>item.total<circle>
-  // Activate pop-up
-
-
-// Your shopping display 
-  // For each key in state.object 
-  // Print inventory.object[id][name] ...
-  // Print sum
-  // Checkout button 
-  // Close button
-
-// Button component
-  // Button with add and delete function
 
 // Multi-Page
 // Tests

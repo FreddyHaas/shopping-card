@@ -4,8 +4,7 @@ import { HiShoppingCart } from 'react-icons/hi'
 import TotalItems from './totalItems.js';
  
 
-const Header = ( { totalQuantity }) => {
-    console.log(totalQuantity);
+const Header = ( { totalQuantity, togglePopup }) => {
     return (
         <Container>
             <Navbar>
@@ -14,7 +13,7 @@ const Header = ( { totalQuantity }) => {
                     <Navigator>Home</Navigator>
                     <Navigator>Products</Navigator>
                     <Navigator>Contact</Navigator>
-                    <Basketcontainer>
+                    <Basketcontainer onClick={togglePopup}>
                         <HiShoppingCart color="black" fontSize="28px"/>
                         <TotalItems totalQuantity={totalQuantity}/>
                     </Basketcontainer>
