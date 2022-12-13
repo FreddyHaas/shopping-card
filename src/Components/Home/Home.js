@@ -1,13 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 import image from './img/home.jpg';
-import stripe from './img/line.jpg'
+import stripe from './img/line.jpg';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
     return (
         <Container>
             <Shape xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#46FFD3" fill-opacity="1" d="M0,256L60,266.7C120,277,240,299,360,256C480,213,600,107,720,96C840,85,960,171,1080,170.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
+                <path fill="#46FFD3" fillOpacity="1" d="M0,256L60,266.7C120,277,240,299,360,256C480,213,600,107,720,96C840,85,960,171,1080,170.7C1200,171,1320,85,1380,42.7L1440,0L1440,320L1380,320C1320,320,1200,320,1080,320C960,320,840,320,720,320C600,320,480,320,360,320C240,320,120,320,60,320L0,320Z"></path>
             </Shape>
             <ShapeExtension></ShapeExtension>
             <Content>
@@ -17,7 +18,9 @@ const Home = () => {
                         <Header>We don't do fashion, we are fashion</Header>
                         <Stripe src={stripe}/>
                     </HeaderContainer>
-                    <Button>Shop now</Button>
+                    <StyledLink to='/products'>
+                        <Button>Shop now</Button>
+                    </StyledLink>
                 </Text>
                 <ImageContainer>
                     <Image src={image} alt='models'/>
@@ -89,6 +92,11 @@ const Stripe = styled.img`
     width: 210px;
 `
 
+const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: white;
+`
+
 const Button = styled.div`
     margin-top: 10px;
     font-size: 36px;
@@ -100,9 +108,12 @@ const Button = styled.div`
     display: flex;
     justify-content: center;
     border-radius: 30px;
+    &:hover {
+        background-color: ${({theme}) => theme.colors.blackHover};
+    }
 `
 const Image = styled.img`
-    max-width: 40vw;
+    max-width: min(40vw, 600px);
 `
 
 const HeaderContainer = styled.div`

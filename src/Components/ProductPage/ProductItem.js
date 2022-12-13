@@ -74,6 +74,9 @@ const Button = styled.button`
     font-weight: 700;
     font-size: 20px;
     border: none;
+    &:hover {
+        background-color: ${ ({ theme }) => theme.colors.blackHover };
+    }
 `;
 
 export default ProductItem;

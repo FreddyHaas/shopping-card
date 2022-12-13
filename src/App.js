@@ -4,6 +4,7 @@ import Products from './Components/ProductPage/Products.js';
 import Header from './Components/Header/header.js';
 import Checkout from './Components/Checkout/checkout.js';
 import Home from './Components/Home/Home.js';
+import Contact from './Components/Contact/Contact.js';
 
 const App = () => {
   const [items, setItems] = useState({});
@@ -55,7 +56,7 @@ const App = () => {
   }
 
   const _updateTotalPrice = (id, add=true) => {
-    let totalPriceTemp = totalPrice;
+    let totalPriceTemp = parseFloat(totalPrice);
 
     if (add === true) {
       totalPriceTemp = totalPriceTemp + parseFloat(items[id]['price'])
@@ -63,7 +64,7 @@ const App = () => {
       totalPriceTemp = totalPriceTemp - parseFloat(items[id]['price'])
     }
 
-    setTotalPrice((Math.round(totalPriceTemp*100)/100));
+    setTotalPrice((Math.round(totalPriceTemp*100)/100).toFixed(2));
   }
 
   const _updateTotalSpendPerItem = (id, add=true) => {
@@ -120,6 +121,7 @@ const App = () => {
             />}
           />
           <Route path='/' element={<Home/>}/>
+          <Route path='/contact' element={<Contact/>}/>
         </Routes>
       </div>
   </BrowserRouter>

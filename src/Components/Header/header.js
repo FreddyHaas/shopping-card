@@ -2,17 +2,26 @@ import React from 'react';
 import styled from 'styled-components';
 import { HiShoppingCart } from 'react-icons/hi'
 import TotalItems from './totalItems.js';
+import { Link } from 'react-router-dom';
  
 
 const Header = ( { totalQuantity, togglePopup }) => {
     return (
         <Container>
             <Navbar>
+            <LogoLink to='/'>
                 <Logo>FakeStore</Logo>
+            </LogoLink>
                 <NavbarRight>
-                    <Navigator>Home</Navigator>
-                    <Navigator>Products</Navigator>
-                    <Navigator>Contact</Navigator>
+                    <NavbarLink to='/'>
+                        <Navigator>Home</Navigator>
+                    </NavbarLink>                    
+                    <NavbarLink to='/products'>
+                        <Navigator>Products</Navigator>
+                    </NavbarLink>
+                    <NavbarLink to='/contact'>
+                        <Navigator>Contact</Navigator>
+                    </NavbarLink>
                     <Basketcontainer onClick={togglePopup}>
                         <HiShoppingCart color="black" fontSize="28px"/>
                         <TotalItems totalQuantity={totalQuantity}/>
@@ -24,6 +33,7 @@ const Header = ( { totalQuantity, togglePopup }) => {
 }
 
 export default Header;
+
 
 const Container = styled.div`
     width: 100vw;
@@ -38,6 +48,14 @@ const Navbar = styled.div`
     display: flex; 
     justify-content: space-between;
 `
+
+const LogoLink = styled(Link)`
+    text-decoration: none;
+    color: ${ ({ theme }) => theme.colors.turquoise };
+    display: flex;
+    algin-items: center;
+`
+
 
 const Logo = styled.div`
     font-size: 70px;
@@ -54,6 +72,11 @@ const NavbarRight = styled.div`
     align-items: center;
     gap: 60px;
     color: ${ ({ theme }) => theme.colors.white };
+`
+
+const NavbarLink = styled(Link)`
+    text-decoration: none;
+    color: white;
 `
 
 const Navigator = styled.div`

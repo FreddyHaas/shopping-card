@@ -59,6 +59,7 @@ const Container = styled.div`
     background-color: rgba(0, 0, 0, 0.6);
     display: flex; 
     justify-content: flex-end;
+    z-index: 3;
 `
 
 const Cart = styled.div`
@@ -80,7 +81,7 @@ const Header = styled.div`
 
 const ItemsDisplay = styled.div`
     width: 100%;
-    max-height: 300px;
+    max-height: 350px;
     overflow: scroll;
     display: flex;
     flex-direction: column;
