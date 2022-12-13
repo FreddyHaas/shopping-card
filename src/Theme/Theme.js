@@ -7,6 +7,7 @@ export const Theme = {
         bordergrey: 'rgb(229, 229, 229)',
         red: 'rgb(255, 153, 153)',
         white: 'rgb(255, 255, 255)',
+        fontgrey: 'rgb(123, 123, 123)',
     },
 }
 

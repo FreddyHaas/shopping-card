@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Products from './Components/ProductPage/Products.js';
 import Header from './Components/Header/header.js';
 import Checkout from './Components/Checkout/checkout.js';
+import Home from './Components/Home/Home.js';
 
 const App = () => {
   const [items, setItems] = useState({});
@@ -93,27 +95,34 @@ const App = () => {
   }
 
   return (
-    <div> 
-      <Header
-        totalQuantity={totalQuantity}
-        togglePopup={togglePopup}
-      />
-      <Products 
-        setItems={setItems}
-        items={items}
-        addItem={addItem}
-      />
-      <Checkout 
-        popupActive={popupActive}
-        togglePopup = {togglePopup}
-        totalPrice={totalPrice}
-        items={items}
-        orderData={orderData}
-        totalSpendPerItem={totalSpendPerItem}
-        addItem={addItem}
-        removeItem={removeItem}
+    <BrowserRouter>
+      <div> 
+        <Header
+          totalQuantity={totalQuantity}
+          togglePopup={togglePopup}
         />
-    </div>
+        <Checkout 
+          popupActive={popupActive}
+          togglePopup = {togglePopup}
+          totalPrice={totalPrice}
+          items={items}
+          orderData={orderData}
+          totalSpendPerItem={totalSpendPerItem}
+          addItem={addItem}
+          removeItem={removeItem}
+        />
+        <Routes>
+          <Route path='/products' element={
+            <Products 
+            setItems={setItems}
+            items={items}
+            addItem={addItem}
+            />}
+          />
+          <Route path='/' element={<Home/>}/>
+        </Routes>
+      </div>
+  </BrowserRouter>
   );
 }
 
