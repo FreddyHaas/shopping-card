@@ -2,7 +2,7 @@
 
 A simple FakeStore built mainly with React
 
-Live Demo
+[Live Demo](https://freddyhaas.github.io/shopping-card/)
 
 ## Built with: 
 - React 
