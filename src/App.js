@@ -113,6 +113,8 @@ const App = () => {
           removeItem={removeItem}
         />
         <Routes>
+          <Route path='/' element={<Home/>}/>
+          <Route path='/shopping-card' element={<Home/>}/>
           <Route path='/products' element={
             <Products 
             setItems={setItems}
@@ -120,7 +122,6 @@ const App = () => {
             addItem={addItem}
             />}
           />
-          <Route path='/' element={<Home/>}/>
           <Route path='/contact' element={<Contact/>}/>
         </Routes>
       </div>
