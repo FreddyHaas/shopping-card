@@ -4,29 +4,19 @@ import styled from 'styled-components';
 
 const Products = ({ setItems, items, addItem }) => {
 
-    const NUMBER_OF_ITEMS = 10;
-
     useEffect (() => {
         const loadItems = async () => {
-            setItems(await fetchItems(NUMBER_OF_ITEMS));
+            setItems(await fetchItems());
         }
 
         loadItems();
     }, []);
 
-    const fetchItems = async (number) => {
-        const items = {};
+    const fetchItems = async () => {
 
-        for (let i = 1; i <= number; i++) {
-            const fakestoreURL = `https://fakestoreapi.com/products/${i}`;
-            const response = await fetch(fakestoreURL);
-            const item = await response.json();
-            const id = item.id;
-            const price = parseFloat(item.price).toFixed(2);
-            const image = item.image;
-            const title = item.title;
-            items[id] = { price, title, image};
-        }
+        const fakestoreURL = `https://fakestoreapi.com/products`;
+        const response = await fetch(fakestoreURL);
+        const items = await response.json();
         
         return items;
     }
