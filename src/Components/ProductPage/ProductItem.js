@@ -10,7 +10,7 @@ const ProductItem = ({id, title, price, image, addItem}) => {
             <ContentSection>
                 <ProductInfo>
                     <Title>{title}</Title>
-                    <Price>{price} $</Price>
+                    <Price>{price.toFixed(2)} $</Price>
                 </ProductInfo>
                 <Button id={id} onClick={addItem}>Add to cart</Button>
             </ContentSection>
