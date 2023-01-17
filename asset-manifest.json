@@ -1,11 +1,11 @@
 {
   "files": {
-    "main.js": "/shopping-card/static/js/main.720d1e20.js",
+    "main.js": "/shopping-card/static/js/main.f5bc8a32.js",
     "static/media/home.jpg": "/shopping-card/static/media/home.bd89f8b360e58987fee2.jpg",
     "index.html": "/shopping-card/index.html",
-    "main.720d1e20.js.map": "/shopping-card/static/js/main.720d1e20.js.map"
+    "main.f5bc8a32.js.map": "/shopping-card/static/js/main.f5bc8a32.js.map"
   },
   "entrypoints": [
-    "static/js/main.720d1e20.js"
+    "static/js/main.f5bc8a32.js"
   ]
 }
