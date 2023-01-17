@@ -1,70 +1,70 @@
-import { useEffect } from 'react';
-import ProductItem from './ProductItem.js';
-import styled from 'styled-components';
+import { useEffect } from "react";
+import ProductItem from "./ProductItem.js";
+import styled from "styled-components";
 
 const Products = ({ setItems, items, addItem }) => {
+  useEffect(() => {
+    const loadItems = async () => {
+      setItems(await fetchItems());
+    };
 
-    useEffect (() => {
-        const loadItems = async () => {
-            setItems(await fetchItems());
-        }
+    loadItems();
+    // eslint-disable-next-line
+  }, []);
 
-        loadItems();
-    }, []);
+  const fetchItems = async () => {
+    const fakestoreURL = `https://fakestoreapi.com/products`;
+    const response = await fetch(fakestoreURL);
+    const items = await response.json();
 
-    const fetchItems = async () => {
+    return items;
+  };
 
-        const fakestoreURL = `https://fakestoreapi.com/products`;
-        const response = await fetch(fakestoreURL);
-        const items = await response.json();
-        
-        return items;
+  const displayItems = () => {
+    const display = [];
+
+    for (const id in items) {
+      display.push(
+        <ProductItem
+          key={id}
+          id={id}
+          title={items[id]["title"]}
+          price={items[id]["price"]}
+          image={items[id]["image"]}
+          addItem={addItem}
+        />
+      );
     }
 
-    const displayItems = () => {
-        const display = [];
+    return display;
+  };
 
-        for (const id in items) {
-            display.push (
-                <ProductItem 
-                key={id} 
-                id={id}
-                title={items[id]['title']} 
-                price={items[id]['price']} 
-                image={items[id]['image']}
-                addItem={addItem}
-                />
-            )
-        }
+  const itemsOnDisplay = displayItems();
 
-        return display;
-    }
-
-    const itemsOnDisplay = displayItems();
-
-    return (
-        <Container>
-             <DisplayItems>
-                {itemsOnDisplay}
-            </DisplayItems>
-        </Container>
-       
-    )
-}
+  return (
+    <Container>
+      <DisplayItems>{itemsOnDisplay}</DisplayItems>
+    </Container>
+  );
+};
 
 export default Products;
 
 const Container = styled.div`
-    display: flex;
-    justify-content: center;
-    background-color: ${({ theme }) => theme.colors.backgroundgrey };
-    padding: 30px 0px;
-`
+  display: flex;
+  justify-content: center;
+  background-color: ${({ theme }) => theme.colors.backgroundgrey};
+  padding: 30px 0px;
+`;
 
 const DisplayItems = styled.div`
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-template-rows: repeat (3, auto);
-    gap: 30px;
-    max-width: 1100px;
-`
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  width: min(1100px, 85%);
+  margin: 0px 10px;
+  @media (max-width: 300px) {
+    grid-template-columns: 1fr;
+  }
+  }
+`;
