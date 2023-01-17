@@ -48,7 +48,7 @@ const Container = styled.div`
 `;
 
 const Navbar = styled.div`
-  width: min(1100px, 100%);
+  width: min(1100px, 85%);
   display: flex;
   margin: 0px 10px;
   justify-content: space-between;
@@ -81,6 +81,10 @@ const Logo = styled.div`
   @media (max-width: 800px) {
     font-size: 40px;
   }
+
+  @media (max-width: 400px) {
+    font-size: 30px;
+  }
 `;
 
 const NavbarRight = styled.div`
@@ -93,16 +97,26 @@ const NavbarRight = styled.div`
   @media (max-width: 1000px) {
     font-size: 18px;
   }
+
   @media (max-width: 600px) {
     width: fit-content;
     justify-content: center;
     gap: 20px;
+  }
+
+  @media (max-width: 400px) {
+    font-size: 17px;
+    gap: 15px;
   }
 `;
 
 const NavbarLink = styled(Link)`
   text-decoration: none;
   color: white;
+  transition: transform 0.2s ease-in;
+  &:hover {
+    transform: scale(1.2);
+  }
 `;
 
 const Navigator = styled.div`
@@ -124,5 +138,9 @@ const Basketcontainer = styled.div`
   @media (max-width: 1000px) {
     height: 40px;
     width: 40px;
+  }
+  transition: transform 0.2s ease-in;
+  &:hover {
+    transform: scale(1.2);
   }
 `;
