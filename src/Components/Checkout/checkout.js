@@ -72,13 +72,16 @@ const Container = styled.div`
 
 const Cart = styled.div`
   height: 100vh;
-  width: 500px;
+  width: min(500px, 100vw);
   background-color: rgb(255, 255, 255);
   padding: 60px 40px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
+  @media (max-width: 450px) {
+    padding: 60px 10px;
+  }
 `;
 
 const Header = styled.div`
@@ -86,6 +89,9 @@ const Header = styled.div`
   justify-content: center;
   font-size: 38px;
   font-weight: 900;
+  @media (max-width: 450px) {
+    font-size: 30px;
+  }
 `;
 
 const ItemsDisplay = styled.div`
@@ -93,13 +99,20 @@ const ItemsDisplay = styled.div`
   max-height: 350px;
   overflow: scroll;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: 30px;
+  @media (max-width: 450px) {
+    gap: 20px;
+  }
 `;
 
 const Total = styled.div`
   font-size: 28px;
   font-weight: 900;
+  @media (max-width: 450px) {
+    font-size: 24px;
+  }
 `;
 
 const ButtonContainer = styled.div`
@@ -120,6 +133,9 @@ const CheckoutButton = styled.button`
   &: hover {
     opacity: 0.7;
   }
+  @media (max-width: 450px) {
+    font-size: 20px;
+  }
 `;
 
 const CloseButton = styled.button`
@@ -133,11 +149,17 @@ const CloseButton = styled.button`
   &: hover {
     opacity: 0.85;
   }
+  @media (max-width: 450px) {
+    font-size: 20px;
+  }
 `;
 
 const Span = styled.span`
   font-weight: 400;
   font-style: italic;
+  @media (max-width: 450px) {
+    font-size: 16px;
+  }
 `;
 
 export default Checkout;
