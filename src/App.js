@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Products from './Components/ProductPage/Products.js';
-import Header from './Components/Header/header.js';
-import Checkout from './Components/Checkout/checkout.js';
-import Home from './Components/Home/Home.js';
-import Contact from './Components/Contact/Contact.js';
+import React, { useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Products from "./Components/ProductPage/Products.js";
+import Header from "./Components/Header/header.js";
+import Checkout from "./Components/Checkout/checkout.js";
+import Home from "./Components/Home/Home.js";
+import Contact from "./Components/Contact/Contact.js";
 
 const App = () => {
   const [items, setItems] = useState({});
   const [orderData, setOrderData] = useState({});
   const [totalSpendPerItem, setSpendPerItem] = useState({});
-  const [totalPrice, setTotalPrice] = useState((0));
-  const [totalQuantity, setTotalQuantity] = useState((0));
-  const [popupActive, setPopupActive] = useState((false));
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [totalQuantity, setTotalQuantity] = useState(0);
+  const [popupActive, setPopupActive] = useState(false);
 
   const addItem = (e) => {
     const { id } = e.target;
@@ -21,27 +21,27 @@ const App = () => {
       orderDataTemp[id] = 0;
     }
     orderDataTemp[id] = orderDataTemp[id] + 1;
-    setOrderData({...orderDataTemp});
+    setOrderData({ ...orderDataTemp });
 
     _updateTotalQuantity(true);
     _updateTotalPrice(id, true);
     _updateTotalSpendPerItem(id, true);
-  } 
+  };
 
   const removeItem = (e) => {
-    const { id } = e.target; 
+    const { id } = e.target;
     if (orderData[id] === undefined || orderData[id] === 0) {
-      return
+      return;
     }
 
     let orderDataTemp = orderData;
-    orderDataTemp[id] = orderDataTemp[id] - 1; 
-    setOrderData({...orderDataTemp});
+    orderDataTemp[id] = orderDataTemp[id] - 1;
+    setOrderData({ ...orderDataTemp });
 
     _updateTotalQuantity(false);
     _updateTotalPrice(id, false);
     _updateTotalSpendPerItem(id, false);
-  }
+  };
 
   const _updateTotalQuantity = (add = true) => {
     let totalQuantityTemp = totalQuantity;
@@ -51,23 +51,23 @@ const App = () => {
     } else {
       totalQuantityTemp -= 1;
     }
-    
-    setTotalQuantity(totalQuantityTemp);
-  }
 
-  const _updateTotalPrice = (id, add=true) => {
+    setTotalQuantity(totalQuantityTemp);
+  };
+
+  const _updateTotalPrice = (id, add = true) => {
     let totalPriceTemp = parseFloat(totalPrice);
 
     if (add === true) {
-      totalPriceTemp = totalPriceTemp + parseFloat(items[id]['price'])
+      totalPriceTemp = totalPriceTemp + parseFloat(items[id]["price"]);
     } else {
-      totalPriceTemp = totalPriceTemp - parseFloat(items[id]['price'])
+      totalPriceTemp = totalPriceTemp - parseFloat(items[id]["price"]);
     }
 
-    setTotalPrice((Math.round(totalPriceTemp*100)/100).toFixed(2));
-  }
+    setTotalPrice((Math.round(totalPriceTemp * 100) / 100).toFixed(2));
+  };
 
-  const _updateTotalSpendPerItem = (id, add=true) => {
+  const _updateTotalSpendPerItem = (id, add = true) => {
     let totalSpendPerItemTemp = totalSpendPerItem;
 
     if (totalSpendPerItemTemp[id] === undefined) {
@@ -77,34 +77,35 @@ const App = () => {
     totalSpendPerItemTemp[id] = parseFloat(totalSpendPerItemTemp[id]);
 
     if (add === true) {
-      totalSpendPerItemTemp[id] = totalSpendPerItemTemp[id] + parseFloat(items[id]['price']);
+      totalSpendPerItemTemp[id] =
+        totalSpendPerItemTemp[id] + parseFloat(items[id]["price"]);
     } else {
-      totalSpendPerItemTemp[id] = totalSpendPerItemTemp[id] - parseFloat(items[id]['price']);
+      totalSpendPerItemTemp[id] =
+        totalSpendPerItemTemp[id] - parseFloat(items[id]["price"]);
     }
 
-    totalSpendPerItemTemp[id] = (Math.round(totalSpendPerItemTemp[id]*100)/100).toFixed(2);
+    totalSpendPerItemTemp[id] = (
+      Math.round(totalSpendPerItemTemp[id] * 100) / 100
+    ).toFixed(2);
 
     setSpendPerItem(totalSpendPerItemTemp);
-  }
+  };
 
   const togglePopup = () => {
-    if(popupActive === true) {
+    if (popupActive === true) {
       setPopupActive(false);
     } else {
       setPopupActive(true);
     }
-  }
+  };
 
   return (
     <BrowserRouter>
-      <div> 
-        <Header
-          totalQuantity={totalQuantity}
-          togglePopup={togglePopup}
-        />
-        <Checkout 
+      <div>
+        <Header totalQuantity={totalQuantity} togglePopup={togglePopup} />
+        <Checkout
           popupActive={popupActive}
-          togglePopup = {togglePopup}
+          togglePopup={togglePopup}
           totalPrice={totalPrice}
           items={items}
           orderData={orderData}
@@ -113,25 +114,19 @@ const App = () => {
           removeItem={removeItem}
         />
         <Routes>
-          <Route path='/' element={<Home/>}/>
-          <Route path='/shopping-card' element={<Home/>}/>
-          <Route path='/products' element={
-            <Products 
-            setItems={setItems}
-            items={items}
-            addItem={addItem}
-            />}
+          <Route path="/" element={<Home />} />
+          <Route path="/shopping-card" element={<Home />} />
+          <Route
+            path="/products"
+            element={
+              <Products setItems={setItems} items={items} addItem={addItem} />
+            }
           />
-          <Route path='/contact' element={<Contact/>}/>
+          <Route path="/contact" element={<Contact />} />
         </Routes>
       </div>
-  </BrowserRouter>
+    </BrowserRouter>
   );
-}
+};
 
 export default App;
-
-// Multi-Page
-// Tests
-
-// Scroll-down
